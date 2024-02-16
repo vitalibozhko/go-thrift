@@ -205,6 +205,7 @@ func (d *decoder) readValue(thriftType byte, rf reflect.Value) {
 		if err != nil {
 			d.error(err)
 		}
+		v.Set(reflect.MakeSlice(reflect.SliceOf(elemType), 0, n))
 		for i := 0; i < n; i++ {
 			val := reflect.New(elemType)
 			d.readValue(et, val.Elem())
@@ -220,6 +221,7 @@ func (d *decoder) readValue(thriftType byte, rf reflect.Value) {
 			if err != nil {
 				d.error(err)
 			}
+			v.Set(reflect.MakeSlice(reflect.SliceOf(elemType), 0, n))
 			for i := 0; i < n; i++ {
 				val := reflect.New(elemType)
 				d.readValue(et, val.Elem())
